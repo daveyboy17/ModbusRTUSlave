@@ -1,5 +1,5 @@
 def describe(frame: bytes):
-
+    """Returns a str describing the frame if valid."""
     if len(frame) < 2:
         return ""
 
