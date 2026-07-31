@@ -101,6 +101,7 @@ class ModbusRTUSlave:
                 # self.registers.read_holding(addr)
                 addr
             )
+            print(f"values: {self.registers.read_holding(addr)}")
 
         response = bytes(
             [
