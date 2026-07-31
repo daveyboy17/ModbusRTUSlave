@@ -20,7 +20,9 @@ class ModbusRTUSlave:
 
 
     def process(self, frame: bytes) -> bytes | None:
+
         if not verify(frame):
+            # print(f"Invalid CRC: {frame.hex()}")
             return None
 
         if frame[0] != self.address:
@@ -29,7 +31,10 @@ class ModbusRTUSlave:
         # pass frame to the decoder to describe.
         # and send the description to the 
         # packet monitor.
-        self.packet.description = describe(frame)
+        # self.packet.description = describe(frame)
+
+        if frame[0] == self.address:
+            print(f"Received: {frame.hex()}")
 
         # Build the response.
         function = frame[1]
@@ -48,16 +53,21 @@ class ModbusRTUSlave:
                 response = self.write_multiple(frame)
 
             else:
+                print(f"Unsupported function code: {function}")
                 return self.exception(
                     function,
                     1
                 )
 
         except KeyError:
+            print(f"Invalid register address in frame: {frame.hex()}")
             return self.exception(
                 function,
                 2
             )
+
+        if frame[0] == 1:
+            print(f"Response: {response.hex()}")
 
         return append_crc(response)
 
@@ -72,6 +82,8 @@ class ModbusRTUSlave:
             frame[4:6],
             "big"
         )
+
+        print(f"Read Holding Registers: start={start}, count={count}")
         
         if count < 1 or count > 125:
             return self.exception(
@@ -86,7 +98,8 @@ class ModbusRTUSlave:
             start + count
         ):
             values.append(
-                self.registers.read_holding(addr)
+                # self.registers.read_holding(addr)
+                addr
             )
 
         response = bytes(
