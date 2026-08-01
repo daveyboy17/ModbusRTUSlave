@@ -31,7 +31,8 @@ class ModbusRTUSlave:
         # pass frame to the decoder to describe.
         # and send the description to the 
         # packet monitor.
-        # self.packet.description = describe(frame)
+        description = describe(frame)
+        print(f"{description}")
 
         if frame[0] == self.address:
             print(f"Received: {frame.hex()}")

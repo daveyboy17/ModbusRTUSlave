@@ -93,7 +93,7 @@ class MainWindow(QMainWindow):
         """
         
         root = QWidget()
-        layout = QVBoxLayout()
+        layout = QVBoxLayout()  # Vertical Box layout
 
         root.setLayout(layout)
 
@@ -104,7 +104,7 @@ class MainWindow(QMainWindow):
             "Serial Settings"
         )
 
-        serial_layout = QHBoxLayout()
+        serial_layout = QHBoxLayout()  # Horizontal Box layout
 
         self.port = QComboBox()
         self.port.addItems(
@@ -192,8 +192,16 @@ class MainWindow(QMainWindow):
             self.delete_holding_register
         )
 
+        # holding_button_layout = QHBoxLayout()  # Horizontal Box layout
+
         layout.addWidget(add)
         layout.addWidget(delete)
+        # holding_button_layout.addWidget(add)
+        # holding_button_layout.addWidget(delete)
+
+        # self.holding_table.setLayout(
+        #     holding_button_layout
+        # )
 
         layout.addWidget(
             self.holding_table
