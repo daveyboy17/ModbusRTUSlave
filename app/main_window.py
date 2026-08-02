@@ -47,7 +47,7 @@ class MainWindow(QMainWindow):
         )
 
         self.resize(
-            900,
+            700,
             800
         )
 
@@ -166,9 +166,9 @@ class MainWindow(QMainWindow):
             self.connect_button
         )
 
-        serial_layout.addWidget(
-            QLabel("connect")
-        )
+        # serial_layout.addWidget(
+        #     QLabel("connect")
+        # )
 
         serial_box.setLayout(
             serial_layout
@@ -179,6 +179,10 @@ class MainWindow(QMainWindow):
         )
 
         # Add the Holding register settings.
+        # register_box = QGroupBox(
+        #     "Register Settings"
+        # )
+
         self.holding_table = self.create_register_table("Holding Registers")
 
         add = QPushButton("Add Holding")
@@ -192,16 +196,20 @@ class MainWindow(QMainWindow):
             self.delete_holding_register
         )
 
-        # holding_button_layout = QHBoxLayout()  # Horizontal Box layout
+        inner_container = QWidget()
+        holding_button_layout = QHBoxLayout(inner_container)  # Horizontal Box layout
 
-        layout.addWidget(add)
-        layout.addWidget(delete)
-        # holding_button_layout.addWidget(add)
-        # holding_button_layout.addWidget(delete)
+        # layout.addWidget(add)
+        # layout.addWidget(delete)
+        holding_button_layout.addWidget(add)
+        holding_button_layout.addWidget(delete)
 
-        # self.holding_table.setLayout(
+        # register_box.setLayout(
         #     holding_button_layout
         # )
+        layout.addWidget(
+            inner_container
+        )
 
         layout.addWidget(
             self.holding_table
@@ -221,8 +229,17 @@ class MainWindow(QMainWindow):
             self.delete_input_register
         )
 
-        layout.addWidget(add)
-        layout.addWidget(delete)
+        inner_container = QWidget()
+        input_button_layout = QHBoxLayout(inner_container)  # Horizontal Box layout
+
+        # layout.addWidget(add)
+        # layout.addWidget(delete)
+        input_button_layout.addWidget(add)
+        input_button_layout.addWidget(delete)
+
+        layout.addWidget(
+            inner_container
+        )
 
         layout.addWidget(
             self.input_table
@@ -298,6 +315,7 @@ class MainWindow(QMainWindow):
         """Used to create both Holding and Input
         Register tables."""
         table = QTableWidget()
+        table.setFixedHeight(120)
         table.setColumnCount(4)
         table.setHorizontalHeaderLabels(
             [
