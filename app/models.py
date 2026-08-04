@@ -1,4 +1,5 @@
 from dataclasses import dataclass, asdict
+import decoder
 
 
 @dataclass
@@ -61,7 +62,8 @@ class PacketLogEntry:
             )[:-3],
             direction = direction,
             data = data,
-            description = description
+            # description = description
+            description = decoder.describe(data)
         )
 
     def hex_string(self):
