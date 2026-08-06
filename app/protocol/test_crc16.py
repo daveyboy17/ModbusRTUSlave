@@ -1,10 +1,10 @@
 import unittest
 # from .crc16 import calculate
-import crc16
+from .crc16 import calculate
 
 
 class TestCrc16(unittest.TestCase):
-    def TestValidFrames(self):
+    def test_ValidFrames(self):
         frame = bytes([1, 3, 0, 1, 12])
-        response = crc16.calculate(frame)
-        self.assertEqual(response, 123)
+        response = calculate(frame)
+        self.assertEqual(response, 4376)
