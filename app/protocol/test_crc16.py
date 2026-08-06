@@ -1,5 +1,4 @@
 import unittest
-# from .crc16 import calculate
 from .crc16 import calculate
 
 
