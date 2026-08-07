@@ -33,8 +33,8 @@ class RegisterBank:
 
     def read_holding(self, address):
         print(f"Holding register: {address}")
-        # return self.holding[address].value
-        return 10
+        return self.holding[address].value
+        # return 10
 
     def write_holding(self, address, value):
         self.holding[address].set_value(value)

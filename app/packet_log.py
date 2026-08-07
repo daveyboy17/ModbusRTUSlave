@@ -24,3 +24,13 @@ class PacketMonitor(QTextEdit):
         text += "\n"
 
         self.append(text)
+
+
+    def add_description(self, description):
+        text = (
+            f"{description}\n"
+        )
+
+        text += "\n"
+
+        self.append(text)

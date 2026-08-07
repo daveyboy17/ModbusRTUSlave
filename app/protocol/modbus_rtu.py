@@ -22,7 +22,7 @@ class ModbusRTUSlave:
     def process(self, frame: bytes) -> bytes | None:
 
         if not verify(frame):
-            # print(f"Invalid CRC: {frame.hex()}")
+            print(f"Invalid CRC: {frame.hex()}")
             return None
 
         if frame[0] != self.address:
@@ -84,7 +84,9 @@ class ModbusRTUSlave:
             "big"
         )
 
-        print(f"Reading Holding Registers: start={start}, count={count}")
+        # print(f"Reading Holding Registers: start={start}, count={count}")
+        
+        function = frame[1]
         
         if count < 1 or count > 125:
             return self.exception(
@@ -132,6 +134,8 @@ class ModbusRTUSlave:
             frame[4:6],
             "big"
         )
+
+        function = frame[1]
         
         if count < 1 or count > 125:
             return self.exception(
@@ -195,6 +199,8 @@ class ModbusRTUSlave:
             frame[4:6],
             "big"
         )
+        
+        function = frame[1]
         
         if count < 1 or count > 123:
             return self.exception(

@@ -1,5 +1,4 @@
 from dataclasses import dataclass, asdict
-import app.protocol.decoder
 
 
 @dataclass
@@ -57,13 +56,12 @@ class PacketLogEntry:
         description=""
     ):
         return cls(
-            timestamp=datetime.now().strftime(
+            timestamp = datetime.now().strftime(
                 "%H:%M:%S.%f"
             )[:-3],
             direction = direction,
             data = data,
-            # description = description
-            # description = decoder.describe(data)
+            description = description
         )
 
     def hex_string(self):
