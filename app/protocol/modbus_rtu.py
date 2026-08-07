@@ -84,7 +84,7 @@ class ModbusRTUSlave:
             "big"
         )
 
-        print(f"Read Holding Registers: start={start}, count={count}")
+        print(f"Reading Holding Registers: start={start}, count={count}")
         
         if count < 1 or count > 125:
             return self.exception(
@@ -102,7 +102,8 @@ class ModbusRTUSlave:
                 # self.registers.read_holding(addr)
                 addr
             )
-            print(f"values: {self.registers.read_holding(addr)}")
+            # print(f"values: {self.registers.read_holding(addr)}")
+            print(f"values: {self.registers.read_holding(addr + 40001)}")
 
         response = bytes(
             [

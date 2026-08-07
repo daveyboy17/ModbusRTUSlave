@@ -179,14 +179,11 @@ class MainWindow(QMainWindow):
         )
 
         # Add the Holding register settings.
-        # register_box = QGroupBox(
-        #     "Register Settings"
-        # )
-
         self.holding_table = self.create_register_table("Holding Registers")
 
         add = QPushButton("Add Holding")
         delete = QPushButton("Delete Holding")
+        update = QPushButton("Update Holding")
 
         add.clicked.connect(
             self.add_holding_register
@@ -196,17 +193,17 @@ class MainWindow(QMainWindow):
             self.delete_holding_register
         )
 
+        update.clicked.connect(
+            self.update_holding_registers
+        )
+
         inner_container = QWidget()
         holding_button_layout = QHBoxLayout(inner_container)  # Horizontal Box layout
 
-        # layout.addWidget(add)
-        # layout.addWidget(delete)
         holding_button_layout.addWidget(add)
         holding_button_layout.addWidget(delete)
+        holding_button_layout.addWidget(update)
 
-        # register_box.setLayout(
-        #     holding_button_layout
-        # )
         layout.addWidget(
             inner_container
         )
@@ -445,6 +442,28 @@ class MainWindow(QMainWindow):
 
         self.registers.remove_input(address)
         self.refresh_tables()
+
+
+    def update_holding_registers(self):
+        for row in range(
+            self.holding_table.rowCount()
+        ):
+            address = (
+                int(
+                    self.holding_table.item(row,0).text()
+                )
+                -
+                40001
+            )
+
+            value = int(
+                self.holding_table.item(row,2).text()
+            )
+
+            self.registers.write_holding(
+                address,
+                value
+            )
         
         
     # Serial Port Controls.

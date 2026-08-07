@@ -32,7 +32,9 @@ class RegisterBank:
         return max(self.input.keys()) + 1
 
     def read_holding(self, address):
-        return self.holding[address].value
+        print(f"Holding register: {address}")
+        # return self.holding[address].value
+        return 10
 
     def write_holding(self, address, value):
         self.holding[address].set_value(value)
