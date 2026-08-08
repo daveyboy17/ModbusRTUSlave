@@ -27,8 +27,8 @@ class Configuration:
 
     def save(self):
         self.filename.parent.mkdir(
-            parents=True,
-            exist_ok=True
+            parents = True,
+            exist_ok = True
         )
 
         with open(
@@ -38,5 +38,5 @@ class Configuration:
             json.dump(
                 self.data,
                 f,
-                indent=4
+                indent = 4
             )

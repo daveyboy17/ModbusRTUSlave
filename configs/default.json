@@ -1,0 +1,13 @@
+{
+    "slave_address": 1,
+    "baudrate": 9600,
+    "parity": "N",
+    "stop_bits": 1,
+    "registers": {
+        "Holding": {
+            "0": 10,
+            "1": 15,
+            "2": 20
+        }
+    }
+}

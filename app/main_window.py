@@ -445,25 +445,37 @@ class MainWindow(QMainWindow):
 
 
     def update_holding_registers(self):
+        """Adds the current holding register table to the json config."""
+
+        json_content = {}
         for row in range(
             self.holding_table.rowCount()
         ):
             address = (
                 int(
-                    self.holding_table.item(row,0).text()
+                    self.holding_table.item(row, 0).text()
                 )
                 -
                 40001
             )
 
             value = int(
-                self.holding_table.item(row,2).text()
+                self.holding_table.item(row, 2).text()
             )
+
+            print(f"Holding: {address}, {value}")
+            json_content.update({address: value})
 
             self.registers.write_holding(
                 address,
                 value
             )
+
+        print(json_content)
+        json_holding = {"Holding": json_content}
+
+        self.config.data["registers"] = json_holding
+        self.config.save()
         
         
     # Serial Port Controls.
