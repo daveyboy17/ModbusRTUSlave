@@ -3,6 +3,10 @@ from dataclasses import dataclass
 
 @dataclass
 class CommunicationStatistics:
+    """
+    Statistics for showing in a floating dock,
+    updated every 250ms by a QTimer.
+    """
 
     # Traffic
     rx_frames: int = 0
@@ -81,3 +85,10 @@ class CommunicationStatistics:
 
     def baud(self, rate: int):
         self.baudrate = rate
+
+    def refresh(self) -> str:
+        text = (
+            f"Traffic\nRX\nFrames: {self.rx_frames}\nBytes: {self.rx_bytes}\n"
+            f"TX\nFrames: {self.tx_frames}\nBytes: {self.tx_bytes}\n"
+        )
+        return text

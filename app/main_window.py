@@ -16,7 +16,6 @@ from app.statistics import (
     CommunicationStatistics
 )
 
-
 from PySide6.QtWidgets import (
     QMainWindow,
     QWidget,
@@ -30,8 +29,12 @@ from PySide6.QtWidgets import (
     QTableWidgetItem,
     QGroupBox,
     QCheckBox,
-    QFormLayout
+    QFormLayout,
+    QDockWidget,
+    QTextEdit
 )
+
+from PySide6.QtCore import Qt
 
 from .register_bank import RegisterBank
 from .configuration import Configuration
@@ -229,8 +232,6 @@ class MainWindow(QMainWindow):
         inner_container = QWidget()
         input_button_layout = QHBoxLayout(inner_container)  # Horizontal Box layout
 
-        # layout.addWidget(add)
-        # layout.addWidget(delete)
         input_button_layout.addWidget(add)
         input_button_layout.addWidget(delete)
 
@@ -305,6 +306,22 @@ class MainWindow(QMainWindow):
         layout.addWidget(
             simulation_box
         )
+
+        # Create the statistics QDockWidget instance
+        statistics_panel = QDockWidget("Statistics", self)
+
+        # Add content inside the dock widget
+        dock_content = QTextEdit()
+        dock_content.setText("Statistics will appear here...")
+        # text = self.statistics.refresh()
+        # dock_content.setText(text)
+        statistics_panel.setWidget(dock_content)
+
+        # Add the dock widget to the main window container layout
+        self.addDockWidget(Qt.DockWidgetArea.RightDockWidgetArea, statistics_panel)
+
+        # Programmatically make the dock widget float out immediately
+        statistics_panel.setFloating(True)
 
     # Register Table Controls.
     
