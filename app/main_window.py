@@ -34,7 +34,7 @@ from PySide6.QtWidgets import (
     QTextEdit
 )
 
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QTimer
 
 from .register_bank import RegisterBank
 from .configuration import Configuration
@@ -50,7 +50,7 @@ class MainWindow(QMainWindow):
         )
 
         self.resize(
-            700,
+            800,
             800
         )
 
@@ -88,6 +88,11 @@ class MainWindow(QMainWindow):
         self.response_controller = ResponseController()
 
         self.statistics = CommunicationStatistics()
+
+        timer = QTimer(self)
+        # Needs to update the statistics_panel with self.statistics.refresh()
+        timer.timeout.connect(self.update_statistics)
+        timer.start(250)    # 250 ms
 
 
     def build_ui(self):
@@ -319,9 +324,6 @@ class MainWindow(QMainWindow):
 
         # Add the dock widget to the main window container layout
         self.addDockWidget(Qt.DockWidgetArea.RightDockWidgetArea, statistics_panel)
-
-        # Programmatically make the dock widget float out immediately
-        statistics_panel.setFloating(True)
 
     # Register Table Controls.
     
@@ -590,3 +592,8 @@ class MainWindow(QMainWindow):
             self.response_controller.mode = (
                 ResponseMode.NORMAL
             )
+
+
+    def update_statistics(self):
+        text = self.statistics.refresh()
+        print(text)
