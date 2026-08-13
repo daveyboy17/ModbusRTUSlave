@@ -596,5 +596,4 @@ class MainWindow(QMainWindow):
 
     def update_statistics(self):
         text = self.statistics.refresh()
-        # print(text)
         self.dock_content.setPlainText(text)
