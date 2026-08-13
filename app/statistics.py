@@ -25,6 +25,7 @@ class CommunicationStatistics:
     total_response_time_ms: float = 0.0
     max_response_time_ms: float = 0.0
     ave_response_time_ms: float = 0.0
+    uptime_ms: float = 0.0
 
     # Status
     connected: bool = False
@@ -50,12 +51,12 @@ class CommunicationStatistics:
 
         self.crc_errors = 0
         self.exceptions = 0
-        ignored_frames = 0
-        dropped_responses = 0
+        self.ignored_frames = 0
+        self.dropped_responses = 0
 
-        total_response_time_ms = 0.0
-        max_response_time_ms = 0.0
-        ave_response_time_ms = 0.0
+        self.total_response_time_ms = 0.0
+        self.max_response_time_ms = 0.0
+        self.ave_response_time_ms = 0.0
 
     def crc_error(self):
         self.crc_errors += 1
@@ -89,6 +90,10 @@ class CommunicationStatistics:
     def refresh(self) -> str:
         text = (
             f"Traffic\nRX\nFrames: {self.rx_frames}\nBytes: {self.rx_bytes}\n"
-            f"TX\nFrames: {self.tx_frames}\nBytes: {self.tx_bytes}\n"
+            f"TX\nFrames: {self.tx_frames}\nBytes: {self.tx_bytes}\n\n"
+            f"Protocol\nCRC Errors: {self.crc_errors}\nExceptions: {self.exceptions}\n"
+            f"Ignored: {self.ignored_frames}\nDropped: {self.dropped_responses}\n\n"
+            f"Performance\nMax Response Time: {self.max_response_time_ms}\nAve Response Time: {self.ave_response_time_ms}\n"
+            f"Uptime: {self.uptime_ms}\n"
         )
         return text

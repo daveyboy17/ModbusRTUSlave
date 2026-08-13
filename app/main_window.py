@@ -92,7 +92,7 @@ class MainWindow(QMainWindow):
         timer = QTimer(self)
         # Needs to update the statistics_panel with self.statistics.refresh()
         timer.timeout.connect(self.update_statistics)
-        timer.start(250)    # 250 ms
+        timer.start(500)    # 500 ms
 
 
     def build_ui(self):
@@ -313,17 +313,17 @@ class MainWindow(QMainWindow):
         )
 
         # Create the statistics QDockWidget instance
-        statistics_panel = QDockWidget("Statistics", self)
+        self.statistics_panel = QDockWidget("Statistics", self)
 
         # Add content inside the dock widget
-        dock_content = QTextEdit()
-        dock_content.setText("Statistics will appear here...")
+        self.dock_content = QTextEdit()
+        self.dock_content.setText("Statistics will appear here...")
         # text = self.statistics.refresh()
         # dock_content.setText(text)
-        statistics_panel.setWidget(dock_content)
+        self.statistics_panel.setWidget(self.dock_content)
 
         # Add the dock widget to the main window container layout
-        self.addDockWidget(Qt.DockWidgetArea.RightDockWidgetArea, statistics_panel)
+        self.addDockWidget(Qt.DockWidgetArea.RightDockWidgetArea, self.statistics_panel)
 
     # Register Table Controls.
     
@@ -596,4 +596,5 @@ class MainWindow(QMainWindow):
 
     def update_statistics(self):
         text = self.statistics.refresh()
-        print(text)
+        # print(text)
+        self.dock_content.setPlainText(text)
