@@ -1,5 +1,6 @@
 from .crc16 import append_crc, verify
 from .decoder import describe
+from ..statistics import CommunicationStatistics
 
 
 class ModbusException(Exception):
@@ -18,11 +19,15 @@ class ModbusRTUSlave:
         self.address = slave_address
         self.registers = register_bank
 
+        self.statistics = CommunicationStatistics()
+
 
     def process(self, frame: bytes) -> bytes | None:
 
         if not verify(frame):
             print(f"Invalid CRC: {frame.hex()}")
+            # This needs to be recorded in the statistics.
+            self.statistics.crc_error()
             return None
 
         if frame[0] != self.address:
