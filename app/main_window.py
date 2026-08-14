@@ -507,6 +507,8 @@ class MainWindow(QMainWindow):
                 "Connect"
             )
 
+            self.statistics.connection(False)
+
             return
 
         self.serial_worker.configure(
@@ -519,6 +521,10 @@ class MainWindow(QMainWindow):
         )
 
         self.serial_worker.start()
+
+        self.statistics.connection(True)
+        self.statistics.port(self.port.currentText())
+        self.statistics.baud(int(self.baud.currentText()))
 
         self.connect_button.setText(
             "Disconnect"
