@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+import time
 
 
 @dataclass
@@ -26,6 +27,7 @@ class CommunicationStatistics:
     max_response_time_ms: float = 0.0
     ave_response_time_ms: float = 0.0
     uptime_ms: float = 0.0
+    last_rx_time: float = 0.0
 
     # Status
     connected: bool = False
@@ -35,11 +37,15 @@ class CommunicationStatistics:
     def received(self, count):
         self.rx_frames += 1
         self.rx_bytes += count
+        last_rx_time = time.perf_counter()
 
 
     def transmitted(self, count):
         self.tx_frames += 1
         self.tx_bytes += count
+
+        response_time_ms = time.perf_counter() - self.last_rx_time
+        self.response_time(response_time_ms)
 
 
     def reset(self):
