@@ -31,6 +31,7 @@ class ModbusRTUSlave:
             return None
 
         if frame[0] != self.address:
+            self.statistics.ignored()
             return None
             
         # pass frame to the decoder to describe.
@@ -249,6 +250,7 @@ class ModbusRTUSlave:
         function,
         code
     ):
+        self.statistics.exception()
         return append_crc(
             bytes(
                 [
