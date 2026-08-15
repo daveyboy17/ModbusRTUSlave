@@ -24,10 +24,7 @@ class ResponseController:
         self.exception_code = None
 
 
-    def apply(
-        self,
-        response: bytes | None
-    ) -> bytes | None:
+    def apply(self, response: bytes | None) -> bytes | None:
         if response is None:
             return None
 
@@ -42,6 +39,11 @@ class ResponseController:
         if self.mode == ResponseMode.CORRUPT_CRC:
             response = bytearray(response)
             response[-1] ^= 0xFF
+            return bytes(response)
+
+        if self.mode == ResponseMode.EXCEPTION:
+            response = bytearray(response)
+            response[1] |= 0x80
             return bytes(response)
 
         return response

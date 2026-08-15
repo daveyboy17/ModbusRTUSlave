@@ -35,8 +35,8 @@ class ModbusRTUSlave:
             return None
             
         # pass frame to the decoder to describe.
-        # and send the description to the 
-        # packet monitor.
+        # and add the description to the 
+        # packet log.
         description = describe(frame)
         print(f"{description}")
 
