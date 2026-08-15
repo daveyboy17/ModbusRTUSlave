@@ -12,6 +12,8 @@ class PacketMonitor():
     }
     
     def __init__(self) -> None:
+        super().__init__()
+        
         # self.tree = QTreeWidget(MainWindow)
         self.tree = QTreeWidget()
         self.tree.setColumnCount(6)
