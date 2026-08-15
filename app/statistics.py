@@ -38,7 +38,7 @@ class CommunicationStatistics:
     def received(self, count):
         self.rx_frames += 1
         self.rx_bytes += count
-        last_rx_time = time.perf_counter()
+        self.last_rx_time = time.perf_counter()
 
 
     def transmitted(self, count):
