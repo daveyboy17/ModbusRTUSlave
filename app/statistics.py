@@ -28,6 +28,7 @@ class CommunicationStatistics:
     ave_response_time_ms: float = 0.0
     uptime_ms: float = 0.0
     last_rx_time: float = 0.0
+    connected_at: float = 0.0
 
     # Status
     connected: bool = False
@@ -63,6 +64,9 @@ class CommunicationStatistics:
         self.total_response_time_ms = 0.0
         self.max_response_time_ms = 0.0
         self.ave_response_time_ms = 0.0
+        self.uptime_ms = 0.0
+        self.last_rx_time = 0.0
+        self.connected_at = 0.0
 
     def crc_error(self):
         self.crc_errors += 1
@@ -85,6 +89,8 @@ class CommunicationStatistics:
         self.ave_response_time_ms = self.total_response_time_ms / self.tx_frames
 
     def connection(self, status: bool):
+        if self.connected == False and status == True:
+            self.connected_at = time.perf_counter()
         self.connected = status
 
     def port(self, name: str):
@@ -94,6 +100,8 @@ class CommunicationStatistics:
         self.baudrate = rate
 
     def refresh(self) -> str:
+        if self.connected == True:
+            self.uptime_ms = time.perf_counter() - self.connected_at
         text = (
             f"Traffic\nRX\nFrames: {self.rx_frames}\nBytes: {self.rx_bytes}\n"
             f"TX\nFrames: {self.tx_frames}\nBytes: {self.tx_bytes}\n\n"
