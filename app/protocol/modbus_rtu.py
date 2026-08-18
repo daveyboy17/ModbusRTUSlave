@@ -2,6 +2,16 @@ from .crc16 import append_crc, verify
 from .decoder import describe
 from ..statistics import CommunicationStatistics
 
+# Code, Meaning
+exception_codes = {
+    01: "Illegal Function",
+    02: "Illegal Data Address",
+    03: "Illegal Data Value",
+    04: "Slave Device Failure",
+    06: "Slave Device Busy"
+}
+
+
 
 class ModbusException(Exception):
 
@@ -245,12 +255,9 @@ class ModbusRTUSlave:
         )
 
 
-    def exception(
-        self,
-        function,
-        code
-    ):
+    def exception(self, function, code):
         self.statistics.exception()
+
         return append_crc(
             bytes(
                 [
