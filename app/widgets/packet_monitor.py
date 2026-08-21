@@ -3,12 +3,12 @@ from PySide6.QtWidgets import QTreeWidget, QTreeWidgetItem
 
 class PacketMonitor():
     columns = {
-            0: "Time",
-            1: "Dir",
-            2: "Slave",
-            3: "Function",
-            4: "Bytes",
-            5: "Status"
+            "Time": 0,
+            "Dir": 1,
+            "Slave": 2,
+            "Function": 3,
+            "Bytes": 4,
+            "Status": 5
     }
     
     def __init__(self) -> None:
@@ -17,7 +17,7 @@ class PacketMonitor():
         self.tree = QTreeWidget()
         self.tree.setColumnCount(6)
         names = []
-        for _idx, name in self.columns:
+        for name,  _idx in self.columns:
             names.append(name)
         # tree.setHeaderLabels(["Time", "Dir", "Slave", "Function", "Bytes", "Status"])
         self.tree.setHeaderLabels(names)

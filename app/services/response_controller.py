@@ -28,6 +28,8 @@ class ResponseController:
         if response is None:
             return None
 
+        print(response)
+
         if self.mode == ResponseMode.DROP:
             return None
 
