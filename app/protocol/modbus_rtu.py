@@ -4,11 +4,11 @@ from ..statistics import CommunicationStatistics
 
 # Code, Meaning
 exception_codes = {
-    01: "Illegal Function",
-    02: "Illegal Data Address",
-    03: "Illegal Data Value",
-    04: "Slave Device Failure",
-    06: "Slave Device Busy"
+    "Illegal Function":1,
+    "Illegal Data Address":2,
+    "Illegal Data Value":3,
+    "Slave Device Failure":4,
+    "Slave Device Busy":6
 }
 
 
