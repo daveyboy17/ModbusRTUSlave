@@ -3,13 +3,13 @@ from .decoder import describe
 from ..statistics import CommunicationStatistics
 
 # Code, Meaning
-exception_codes = {
-    01: "Illegal Function",
-    02: "Illegal Data Address",
-    03: "Illegal Data Value",
-    04: "Slave Device Failure",
-    06: "Slave Device Busy"
-}
+# exception_codes = {
+#     01: "Illegal Function",
+#     02: "Illegal Data Address",
+#     03: "Illegal Data Value",
+#     04: "Slave Device Failure",
+#     06: "Slave Device Busy"
+# }
 
 
 
