@@ -108,6 +108,6 @@ class CommunicationStatistics:
             f"Protocol\nCRC Errors: {self.crc_errors}\nExceptions: {self.exceptions}\n"
             f"Ignored: {self.ignored_frames}\nDropped: {self.dropped_responses}\n\n"
             f"Performance\nMax Response Time: {self.max_response_time_ms}\nAve Response Time: {self.ave_response_time_ms}\n"
-            f"Uptime: {self.uptime_ms}\n"
+            f"Uptime: {self.uptime_ms:.1f}\n"
         )
         return text
