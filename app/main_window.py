@@ -537,6 +537,8 @@ class MainWindow(QMainWindow):
         """Process a received frame and
         generate a response if required."""
         response = self.modbus.process(frame)
+
+        self.update_simulation()
         
         # Modify the response if needed.
         response = self.response_controller.apply(response)
