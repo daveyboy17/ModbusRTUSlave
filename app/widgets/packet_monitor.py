@@ -2,6 +2,10 @@ from PySide6.QtWidgets import QTreeWidget, QTreeWidgetItem
 
 
 class PacketMonitor():
+    """
+    This is the Tree Widget panel for the packet monitor.
+    """
+    
     columns = {
             "Time": 0,
             "Dir": 1,
@@ -21,6 +25,7 @@ class PacketMonitor():
             names.append(name)
         # tree.setHeaderLabels(["Time", "Dir", "Slave", "Function", "Bytes", "Status"])
         self.tree.setHeaderLabels(names)
+        self.tree.setAlternatingRowColors(True)
 
 
     def add_entry(self, entry: dict):
