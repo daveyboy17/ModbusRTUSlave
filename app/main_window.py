@@ -582,11 +582,13 @@ class MainWindow(QMainWindow):
             self.response_controller.mode = (
                 ResponseMode.DROP
             )
+            self.statistics.ignored()
 
         elif self.bad_crc.isChecked():
             self.response_controller.mode = (
                 ResponseMode.CORRUPT_CRC
             )
+            self.statistics.crc_error()
 
         elif self.delay_enable.isChecked():
             self.response_controller.mode = (
