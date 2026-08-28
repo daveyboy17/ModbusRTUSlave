@@ -2,6 +2,7 @@ from .crc16 import append_crc, verify
 from .decoder import describe
 from ..statistics import CommunicationStatistics
 
+
 # Code, Meaning
 exception_codes = {
     "Illegal Function": 1,
@@ -12,7 +13,6 @@ exception_codes = {
 }
 
 
-
 class ModbusException(Exception):
 
     def __init__(self, code):
@@ -21,11 +21,7 @@ class ModbusException(Exception):
 
 class ModbusRTUSlave:
 
-    def __init__(
-        self,
-        slave_address,
-        register_bank
-    ):
+    def __init__(self, slave_address, register_bank):
         self.address = slave_address
         self.registers = register_bank
 
@@ -100,7 +96,7 @@ class ModbusRTUSlave:
             "big"
         )
 
-        # print(f"Reading Holding Registers: start={start}, count={count}")
+        print(f"Reading Holding Registers: start={start}, count={count}")
         
         function = frame[1]
         
