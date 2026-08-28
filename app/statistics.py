@@ -103,11 +103,12 @@ class CommunicationStatistics:
         if self.connected == True:
             self.uptime_ms = time.perf_counter() - self.connected_at
         text = (
+            f"Comms\nPort: {self.port_name}\nBaud: {self.baudrate}\nConnected: {self.connected}\n"
             f"Traffic\nRX\nFrames: {self.rx_frames}\nBytes: {self.rx_bytes}\n"
             f"TX\nFrames: {self.tx_frames}\nBytes: {self.tx_bytes}\n\n"
             f"Protocol\nCRC Errors: {self.crc_errors}\nExceptions: {self.exceptions}\n"
             f"Ignored: {self.ignored_frames}\nDropped: {self.dropped_responses}\n\n"
-            f"Performance\nMax Response Time: {self.max_response_time_ms}\nAve Response Time: {self.ave_response_time_ms}\n"
+            f"Performance\nMax Response Time: {self.max_response_time_ms:.2f}\nAve Response Time: {self.ave_response_time_ms:.2f}\n"
             f"Uptime: {self.uptime_ms:.1f}\n"
         )
         return text
