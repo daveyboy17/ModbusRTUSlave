@@ -1,38 +1,29 @@
 from PySide6.QtWidgets import QTreeWidget, QTreeWidgetItem
 
+from ..models import PacketLogEntry
+from ..protocol.crc16 import verify
 
-class PacketMonitor():
-    """
-    This is the Tree Widget panel for the packet monitor.
-    """
-    
-    columns = {
-            "Time": 0,
-            "Dir": 1,
-            "Slave": 2,
-            "Function": 3,
-            "Bytes": 4,
-            "Status": 5
-    }
-    
+
+class PacketMonitor(QTreeWidget):
+    columns = ("Time", "Dir", "Slave", "Function", "Bytes", "Status")
+
     def __init__(self) -> None:
         super().__init__()
-        
-        self.tree = QTreeWidget()
-        self.tree.setColumnCount(6)
-        names = []
-        for name,  _idx in self.columns:
-            names.append(name)
-        # tree.setHeaderLabels(["Time", "Dir", "Slave", "Function", "Bytes", "Status"])
-        self.tree.setHeaderLabels(names)
-        self.tree.setAlternatingRowColors(True)
+        self.setColumnCount(len(self.columns))
+        self.setHeaderLabels(self.columns)
+        self.setAlternatingRowColors(True)
 
+    def add_entry(self, packet: PacketLogEntry) -> None:
+        frame = packet.data
+        values = (
+            packet.timestamp,
+            packet.direction,
+            str(frame[0]) if frame else "",
+            f"{frame[1]:02X}" if len(frame) > 1 else "",
+            packet.hex_string(),
+            "Valid" if verify(frame) else "Invalid",
+        )
 
-    def add_entry(self, entry: dict):
-        item = QTreeWidgetItem(self.tree)
-        item.setText(0, entry[0])
-        item.setText(1, entry[1])
-        item.setText(2, entry[2])
-        item.setText(3, entry[3])
-        item.setText(4, entry[4])
-        item.setText(5, entry[5])
+        item = QTreeWidgetItem(self)
+        for column, value in enumerate(values):
+            item.setText(column, value)

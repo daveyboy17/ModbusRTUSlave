@@ -5,7 +5,7 @@ from app.services.serial_worker import SerialWorker
 from app.services.ports import available_ports
 from app.protocol.modbus_rtu import ModbusRTUSlave
 
-from .packet_log import PacketMonitor
+from .widgets.packet_monitor import PacketMonitor
 from .models import PacketLogEntry
 
 from app.services.response_controller import (
@@ -558,7 +558,7 @@ class MainWindow(QMainWindow):
     def record_rx(self, frame):
         self.statistics.received(len(frame))
 
-        self.packet_monitor.add_packet(
+        self.packet_monitor.add_entry(
             PacketLogEntry.create(
                 "RX",
                 frame
@@ -569,7 +569,7 @@ class MainWindow(QMainWindow):
     def record_tx(self, frame):
         self.statistics.transmitted(len(frame))
 
-        self.packet_monitor.add_packet(
+        self.packet_monitor.add_entry(
             PacketLogEntry.create(
                 "TX",
                 frame
