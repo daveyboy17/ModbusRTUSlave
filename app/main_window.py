@@ -558,7 +558,7 @@ class MainWindow(QMainWindow):
     def record_rx(self, frame):
         self.statistics.received(len(frame))
 
-        self.packet_monitor.add_packet(
+        self.packet_monitor.add_entry(
             PacketLogEntry.create(
                 "RX",
                 frame
@@ -569,7 +569,7 @@ class MainWindow(QMainWindow):
     def record_tx(self, frame):
         self.statistics.transmitted(len(frame))
 
-        self.packet_monitor.add_packet(
+        self.packet_monitor.add_entry(
             PacketLogEntry.create(
                 "TX",
                 frame
