@@ -5,7 +5,7 @@ from app.services.serial_worker import SerialWorker
 from app.services.ports import available_ports
 from app.protocol.modbus_rtu import ModbusRTUSlave
 
-from .packet_log import PacketMonitor
+from .widgets.packet_monitor import PacketMonitor
 from .models import PacketLogEntry
 
 from app.services.response_controller import (
